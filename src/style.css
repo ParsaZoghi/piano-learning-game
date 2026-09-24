@@ -1,0 +1,46 @@
+:root {
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  --bg: #14110f;
+  --fg: #efe6d6;
+}
+
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  overflow: hidden;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+canvas {
+  display: block;
+  touch-action: none;
+}
+
+#hud {
+  position: fixed;
+  left: 16px;
+  top: calc(env(safe-area-inset-top, 0px) + 12px);
+  pointer-events: none;
+}
+
+#note {
+  font-size: 44px;
+  line-height: 1;
+  min-height: 44px;
+}
+
+#hint {
+  font-size: 14px;
+  opacity: .65;
+  margin-top: 6px;
+  max-width: 34ch;
+}
