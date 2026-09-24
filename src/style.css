@@ -44,3 +44,28 @@ canvas {
   margin-top: 6px;
   max-width: 34ch;
 }
+
+#bar {
+  pointer-events: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+#bar button,
+#bar .btn {
+  font: 14px Georgia, serif;
+  color: var(--fg);
+  background: #2a211b;
+  border: 1px solid #4a3b30;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+#status {
+  font-size: 13px;
+  opacity: .75;
+  margin-top: 6px;
+}

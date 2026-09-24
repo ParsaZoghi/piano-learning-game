@@ -10,7 +10,13 @@
   <body>
     <div id="hud">
       <div id="note">&nbsp;</div>
-      <div id="hint">Click keys or play with A–L / W–P. Drag the background to orbit, scroll to zoom.</div>
+      <div id="hint">Click keys or play with A–L / W–P. Space = sustain pedal. Drag the background to orbit, scroll to zoom.</div>
+      <div id="bar">
+        <button id="lbl">Labels</button>
+        <label class="btn">Load samples<input id="files" type="file" accept="audio/*" multiple hidden /></label>
+        <button id="midiBtn">MIDI</button>
+      </div>
+      <div id="status"></div>
     </div>
     <script type="module" src="src/main.js"></script>
   </body>
