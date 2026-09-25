@@ -29,7 +29,6 @@ canvas {
   position: fixed;
   left: 16px;
   top: calc(env(safe-area-inset-top, 0px) + 12px);
-  pointer-events: none;
 }
 
 #note {
@@ -46,7 +45,6 @@ canvas {
 }
 
 #bar {
-  pointer-events: auto;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
