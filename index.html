@@ -1,23 +1,23 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>piano-learning-game</title>
-    <link rel="stylesheet" href="/src/style.css">
-  </head>
-  <body>
-    <div id="hud">
-      <div id="note">&nbsp;</div>
-      <div id="hint">Click keys or play with A–L / W–P. Space = sustain pedal. Drag the background to orbit, scroll to zoom.</div>
-      <div id="bar">
-        <button id="lbl">Labels</button>
-        <label class="btn">Load samples<input id="files" type="file" accept="audio/*" multiple hidden /></label>
-        <button id="midiBtn">MIDI</button>
-      </div>
-      <div id="status"></div>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>3D Piano · 88 keys</title>
+<link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+  <div id="hud">
+    <div id="note">&nbsp;</div>
+    <div id="hint">Space = sustain pedal. Drag the background to orbit, scroll to zoom.</div>
+    <div id="bar">
+      <button id="lbl">Labels</button>
+      <label class="btn">Load samples<input id="files" type="file" accept="audio/*" multiple hidden></label>
+      <button id="midiBtn">MIDI</button>
     </div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+    <div id="status"></div>
+  </div>
+  <aside id="tutor-panel"></aside>
+  <script type="module" src="/src/main.js"></script>
+</body>
 </html>
-

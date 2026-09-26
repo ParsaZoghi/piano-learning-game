@@ -19,6 +19,7 @@ export class PianoAudio {
     this.down = new Set();  // midi currently physically held
     this.sustained = new Set();
     this.samples = [];      // { midi, buffer }
+    this.noteListeners = new Set(); // fn(midi) — called on every noteOn, any input source
   }
 
   /** Lazily creates (or resumes) the AudioContext — must happen after a user gesture. */
@@ -130,6 +131,12 @@ export class PianoAudio {
 
   // ---- Public note on/off/sustain API --------------------------------------
 
+  /** Subscribe to every note played, from any input source. Returns an unsubscribe function. */
+  addNoteListener(fn) {
+    this.noteListeners.add(fn);
+    return () => this.noteListeners.delete(fn);
+  }
+
   noteOn(midi, velocity = 0.8) {
     const key = this.keys[midi];
     if (!key) return;
@@ -142,6 +149,7 @@ export class PianoAudio {
     key.target = 0.07;
     key.mat.color.copy(key.pressColor);
     this.onNote(midiToName(midi));
+    this.noteListeners.forEach((fn) => fn(midi));
   }
 
   noteOff(midi) {

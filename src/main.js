@@ -3,13 +3,21 @@ import { buildKeyboard } from './piano/keyboard.js';
 import { PianoAudio } from './piano/audio.js';
 import { setupInput } from './piano/input.js';
 import { setupUI } from './piano/ui.js';
+import { ProgressStore } from './tutor/progress.js';
+import { PracticeSession } from './tutor/session.js';
+import { setupTutorUI } from './tutor/ui.js';
 
 const { scene, camera, renderer, orbitState, placeCamera } = createScene();
-const { keys, keyMeshes, labels } = buildKeyboard(scene);
+const { keys, keyMeshes, labels, highlights } = buildKeyboard(scene);
 
 const pianoAudio = new PianoAudio(keys);
 setupUI(pianoAudio, labels);
 setupInput({ renderer, camera, keyMeshes, orbitState, pianoAudio });
+
+// Beginner learning-path tutor: stages, exercises, per-note feedback, progress.
+const progress = new ProgressStore();
+const session = new PracticeSession({ pianoAudio, highlights, progress });
+setupTutorUI({ session, container: document.getElementById('tutor-panel') });
 
 // Optional: serve real samples from public/samples/ and uncomment to use them
 // by default instead of the synth. Files must be named like "C4.mp3".

@@ -2,18 +2,21 @@ import * as THREE from 'three';
 import { MIDI_MIN, MIDI_MAX, WHITE_L, BLACK_L, isBlack } from './notes.js';
 import { roundedKey } from './keyGeometry.js';
 import { addLabel } from './labels.js';
+import { addHighlight } from './highlight.js';
 
 /**
  * Builds all 88 keys (MIDI 21..108) plus the case, adds them to `scene`,
- * and returns a lookup used by audio/input/animation:
- *   keys[midi] = { group, mat, baseColor, pressColor, target }
- *   keyMeshes  = flat array of pressable meshes (for raycasting)
- *   labels     = flat array of label planes (for the Labels toggle)
+ * and returns a lookup used by audio/input/animation/tutor:
+ *   keys[midi]       = { group, mat, baseColor, pressColor, target }
+ *   keyMeshes        = flat array of pressable meshes (for raycasting)
+ *   labels           = flat array of label planes (for the Labels toggle)
+ *   highlights[midi] = { mesh, setState } tutor cue overlay, one per key
  */
 export function buildKeyboard(scene) {
   const keys = {};
   const keyMeshes = [];
   const labels = [];
+  const highlights = {};
 
   const OFFSET = 51 / 2; // 52 white keys, centred on x = 0
   let whiteCount = 0;
@@ -38,6 +41,7 @@ export function buildKeyboard(scene) {
     mesh.userData.midi = midi;
     keys[midi] = { group, mat, baseColor, pressColor, target: 0 };
     keyMeshes.push(mesh);
+    highlights[midi] = addHighlight(group, midi);
 
     if (!black) {
       labels.push(addLabel(group, midi));
@@ -46,7 +50,7 @@ export function buildKeyboard(scene) {
   }
 
   buildCase(scene);
-  return { keys, keyMeshes, labels };
+  return { keys, keyMeshes, labels, highlights };
 }
 
 function buildCase(scene) {
